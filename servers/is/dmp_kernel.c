@@ -493,7 +493,7 @@ int proc_nr;
 	 if(sys_getproctab(proc) != OK)
 		 return;
 	 
-	 printf("bla bla bla bla bla [%d/%d]\n", cs, END_PROC_ADDR-BEG_PROC_ADDR);
+	 printf("---------------- Matthew, John, Kyle - Message Table Dump ---------------- [%d/%d]\n", cs, END_PROC_ADDR-BEG_PROC_ADDR);
 	 printf("%9s|", "X \\ Y");
 	 
 	 for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, p < 9; rp++)
