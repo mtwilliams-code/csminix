@@ -541,9 +541,9 @@ int proc_nr;
       int sum = 0
       for(t=0; t < NR_TASKS + NR_PROCS; t++)
       {
-        if (rp->os_message_table[t] > 0)
-          printf("%3d ", rp->os_message_table[t] );
-        sum = sum + rp->os_message_table[t];
+        if ((rp+j)->os_message_table[t] > 0)
+          printf("%3d ", (rp+j)->os_message_table[t] );
+        sum = sum + (rp+j)->os_message_table[t];
       }
       for (t = 0; t < i; t++)
       {
