@@ -517,7 +517,7 @@ int proc_nr;
 			 continue;
 		 ++s;
 		 j = p = 0;
-		 printf("%7s|", rp->p_name);
+		 printf("%5s|", rp->p_name);
 		 for (i = 0; i < NR_TASKS + NR_PROCS, p < 9; i++)
 		 {
 			if (isemptyp(&proc[i]))
@@ -526,7 +526,7 @@ int proc_nr;
 		 	if (j < cs)
 			 continue;
 			++p;
-			printf("%7d|", rp->os_message_table[i]);
+			printf("%5d|", rp->os_message_table[i]);
 		 }
 		 printf("\n");
 	 }
