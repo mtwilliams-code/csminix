@@ -553,15 +553,16 @@ int proc_nr;
         currentSum = sum;
         importantSent[i] = j;
       }
+      printf("%3d", currentSum);
     }
     
     max_digits[i] = 0;
     for (j = 0; j < 13; j++)
     {
       int digits = 5;
-      if (os_cs356_proc_message_table[i][j] < 100000) digits = 5;
-      if (os_cs356_proc_message_table[i][j] < 10000) digits = 4;
-      if (os_cs356_proc_message_table[i][j] < 1000) digits = 3;
+      if (os_cs356_proc_message_table[importantSent[i]][importantSent[j]] < 100000) digits = 5;
+      if (os_cs356_proc_message_table[importantSent[i]][importantSent[j]] < 10000) digits = 4;
+      if (os_cs356_proc_message_table[importantSent[i]][importantSent[j]] < 1000) digits = 3;
 
       (digits > max_digits[i]) ? max_digits[i] = digits : digits+0;          
     }
