@@ -555,7 +555,6 @@ int proc_nr;
       }
     }
     
-    if (os_cs356_proc_sum_received)
     max_digits[i] = 0;
     for (j = 0; j < 13; j++)
     {
