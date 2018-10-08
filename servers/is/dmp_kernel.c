@@ -494,7 +494,6 @@ int proc_nr;
 		 return;
 	 
 	 printf("---------------- Matthew, John, Kyle - Message Table Dump ---------------- [%d/%d]\n", cs, END_PROC_ADDR-BEG_PROC_ADDR);
-	 printf("%7s|", "X \\ Y");
 	 
 	 for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, p < 9; rp++)
 	 {
