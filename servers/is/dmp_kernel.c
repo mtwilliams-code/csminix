@@ -485,29 +485,36 @@ int proc_nr;
  *===========================================================================*/
  PUBLIC void cs356_dmp()
  {
-	 register struct proc *rp;
-	 int i = 0, j = 0, k = 0;
-	 int s = 0, p = 0;
-	 static int cs = 1;
-	 
-	 if(sys_getproctab(proc) != OK)
-		 return;
-	 
-	 printf("---------------- Matthew, John, Kyle - Message Table Dump ---------------- \n", cs, END_PROC_ADDR-BEG_PROC_ADDR);
-	 
-	 for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, p < 9; rp++)
-	 {
-		 if (isemptyp(rp))
-			 continue;
-		 ++j;
-		 if (j < cs)
-			 continue;
-		 ++p;
-		 printf("%7s|", rp->p_name);
-	 }
-	 printf("\n");
-	 
-	 /*for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, s < 22; ++rp)
+	register struct proc *rp;
+	int i = 0, j = 0, k = 0;
+  int s = 0, p = 0, t = 0, v = 0;
+  static int cs = 1;
+  int os_cs356_proc_message_table[NR_TASKS+NR_PROCS][NR_TASKS+NR_PROCS];
+   
+  if(sys_getproctab(proc) != OK)
+    return;
+   
+  printf("---------------- Matthew, John, Kyle - Message Table Dump ---------------- \n");
+   
+  for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR; rp++)
+  {
+    if (isemptyp(rp))
+      continue;
+    ++j;
+    if (j < cs)
+      continue;
+    ++p;
+    for(t=0; t < NR_TASKS + NR_PROCS; t++)
+    {
+      os_356_proc_message_table[v][t]=rp->os_message_table[t];
+    }
+    v++;
+  }
+  printf("\n");
+
+
+  
+/*for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, s < 22; ++rp)
 	 {
 		 if (isemptyp(rp))
 			 continue;
@@ -532,4 +539,116 @@ int proc_nr;
 	 cs +=21;
 	 if (cs > END_PROC_ADDR-BEG_PROC_ADDR)
 		 cs = 1;*/
+  /*char* procName = "";
+
+  int num_procs_to_display = 10;
+  
+  int f,g;
+  int importantSent[10] = {98,99,100,101,102,103,104,105,106,107};
+  int importantReceived[10] = {98,99,100,101,102,103,104,105,106,107};
+  int importantMatrix[10][10] = {{0}};
+
+  int pidsReceived[10] = {0};
+  int pidsSent[10] = {0};
+  int* max_digits = (int*) malloc(sizeof(int)*num_procs_to_display);*/
+
+  /** variables must be declared at the top of the block, because minix is DUMB and follows the 89 standards 
+   * heres some indexes
+   */
+  /*int i, j, k;
+  int flag = 0;
+
+  for (i = 0; i < num_procs_to_display; i++)
+  {
+    for (j = 0; j < 1000; j++)
+    {
+      if (os_cs356_proc_sum_sent[j] > importantSent[i])
+        flag = 0;
+        for(k=0; k<num_procs_to_display; k++)
+          if (importantSent[k] == j)
+            flag = 1;
+        if (flag == 0)
+          importantSent[i] = j;
+    }
+  };
+  
+  for (i = 0; i < num_procs_to_display; i++)
+  {
+    for (j = 0; j < 1000; j++)
+      {
+        if (os_cs356_proc_sum_received[j] > importantReceived[i])
+        {
+          flag = 0;
+          for(k=0; k<num_procs_to_display; k++)
+            if (importantReceived[k] == j)
+              flag = 1;
+          if (flag == 0)
+            importantReceived[i] = j;
+        }
+    }
+  };
+
+  for (i = 0; i < num_procs_to_display; i++)
+  {
+    for (j = 0; j < num_procs_to_display; j++)
+    {
+      importantMatrix[i][j] = os_cs356_proc_message_table[i][j];
+    }
+    pidsSent[i] = (importantSent[i]-100);
+    pidsReceived[i] = (importantReceived[i]-100);
+  }
+  
+
+
+  for (i = 0; i < num_procs_to_display; i++)
+  {
+    max_digits[i] = 0;
+    for (j = 0; j < num_procs_to_display; j++)
+    {
+      int digits = 5;
+      if (importantMatrix[i][j] < 100000) digits = 5;
+      if (importantMatrix[i][j] < 10000) digits = 4;
+      if (importantMatrix[i][j] < 1000) digits = 3;
+
+      (digits > max_digits[i]) ? max_digits[i] = digits : digits+0;          
+    }
+  }
+
+  printf("    name ");
+  for (i = 0; i < num_procs_to_display; i++)
+  {
+    procName = proc_name(pidsReceived[i]);
+    printf("%*.*s ", max_digits[i] , max_digits[i], procName);
+  }
+
+  printf("\nname pid ");
+
+  for (i = 0; i < num_procs_to_display; i++)
+  {
+    printf("%*.*d ", max_digits[i], max_digits[i], pidsReceived[i]);
+  }
+
+  for (i = 0; i < num_procs_to_display; i++)
+  {
+    procName = proc_name(pidsSent[i]);
+    printf("\n%4.4s %3d ", procName, pidsSent[i]);
+    for (j = 0; j < num_procs_to_display; j++)
+    {
+      printf("%*.*d ", max_digits[j], max_digits[j], importantMatrix[i][j]);
+    }
+  }
+
+  printf("\n");
+
+
+  for (i = 0; i < 1000; i ++) 
+  {
+    for (j = 0; j < 1000; j ++) 
+    {
+      if (os_cs356_proc_message_table[i][j] > 0)
+      {
+          printf("%d ", os_cs356_proc_message_table[i][j]);
+      }
+    }
+  }*/
  }
