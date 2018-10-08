@@ -507,7 +507,7 @@ int proc_nr;
 	 }
 	 printf("\n");
 	 
-	 for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, s < 22; ++rp)
+	 /*for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, s < 22; ++rp)
 	 {
 		 if (isemptyp(rp))
 			 continue;
@@ -531,5 +531,5 @@ int proc_nr;
 	 }
 	 cs +=21;
 	 if (cs > END_PROC_ADDR-BEG_PROC_ADDR)
-		 cs = 1;
+		 cs = 1;*/
  }
