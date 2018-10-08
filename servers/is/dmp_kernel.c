@@ -526,7 +526,7 @@ int proc_nr;
 		 	if (j < cs)
 			 continue;
 			++p;
-			printf("%610d|", rp->os_message_table[i]);
+			printf("%10d|", rp->os_message_table[i]);
 		 }
 		 printf("\n");
 	 }
