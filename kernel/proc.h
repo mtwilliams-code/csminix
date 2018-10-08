@@ -18,9 +18,6 @@
 #include "const.h"
 #include "priv.h"
 
-EXTERN int os_cs356_proc_message_table[1000][1000];
-EXTERN int os_cs356_proc_sum_sent[1000];
-EXTERN int os_cs356_proc_sum_received[1000];
 
 struct proc {
   struct stackframe_s p_reg;	/* process' registers saved in stack frame */
@@ -57,6 +54,8 @@ struct proc {
 
   char p_name[P_NAME_LEN];	/* name of the process, including \0 */
 
+  int os_message_table[NR_TASK_NR_PROCS]; 
+	
   endpoint_t p_endpoint;	/* endpoint number, generation-aware */
 
   message p_sendmsg;		/* Message from this process if SENDING */
