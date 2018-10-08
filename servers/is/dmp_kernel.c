@@ -494,7 +494,7 @@ int proc_nr;
 		 return;
 	 
 	 printf("bla bla bla bla bla [%d/%d]\n", cs, END_PROC_ADDR-BEG_PROC_ADDR);
-	 printf("%6s|", "X \\ Y");
+	 printf("%10s|", "X \\ Y");
 	 
 	 for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, p < 9; rp++)
 	 {
@@ -504,7 +504,7 @@ int proc_nr;
 		 if (j < cs)
 			 continue;
 		 ++p;
-		 printf("%6s|", rp->p_name);
+		 printf("%10s|", rp->p_name);
 	 }
 	 printf("\n");
 	 
@@ -517,7 +517,7 @@ int proc_nr;
 			 continue;
 		 ++s;
 		 j = p = 0;
-		 printf("%6s|", rp->p_name);
+		 printf("%10s|", rp->p_name);
 		 for (i = 0; i < NR_TASKS + NR_PROCS, p < 9; i++)
 		 {
 			if (isemptyp(&proc[i]))
@@ -526,7 +526,7 @@ int proc_nr;
 		 	if (j < cs)
 			 continue;
 			++p;
-			printf("%6d|", rp->os_message_table[i]);
+			printf("%610d|", rp->os_message_table[i]);
 		 }
 		 printf("\n");
 	 }
