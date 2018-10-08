@@ -512,7 +512,7 @@ int proc_nr;
     ++p;
     for(t=0; t < NR_TASKS + NR_PROCS; t++)
     {
-      os_356_proc_message_table[v][t]=rp->os_message_table[t];
+      os_cs356_proc_message_table[v][t]=rp->os_message_table[t];
     }
     v++;
   }
@@ -523,9 +523,9 @@ int proc_nr;
     for (j = 0; j < 10; j++)
     {
       int digits = 5;
-      if (os_356_proc_message_table[i][j] < 100000) digits = 5;
-      if (os_356_proc_message_table[i]][j] < 10000) digits = 4;
-      if (os_356_proc_message_table[i][j] < 1000) digits = 3;
+      if (os_cs356_proc_message_table[i][j] < 100000) digits = 5;
+      if (os_cs356_proc_message_table[i][j] < 10000) digits = 4;
+      if (os_cs356_proc_message_table[i][j] < 1000) digits = 3;
 
       (digits > max_digits[i]) ? max_digits[i] = digits : digits+0;          
     }
