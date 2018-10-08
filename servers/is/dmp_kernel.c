@@ -553,7 +553,7 @@ int proc_nr;
         currentSum = sum;
         importantSent[i] = j;
       }
-      if (currentSum > 0):
+      if (currentSum > 0)
         printf("%3d", currentSum);
     }
     
