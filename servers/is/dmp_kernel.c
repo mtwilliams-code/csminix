@@ -553,7 +553,8 @@ int proc_nr;
         currentSum = sum;
         importantSent[i] = j;
       }
-      printf("%3d", currentSum);
+      if (currentSum > 0):
+        printf("%3d", currentSum);
     }
     
     max_digits[i] = 0;
