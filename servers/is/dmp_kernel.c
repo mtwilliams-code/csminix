@@ -554,7 +554,7 @@ int proc_nr;
   {
     procName = (rp+i)->p_name;
     printf("\n%4.4s %3d ", procName, i - NR_TASKS);
-    for (j = 0; j < 10; j++)
+    for (j = 0; j < 13; j++)
     {
       printf("%*.*d ", max_digits[j], max_digits[j], os_cs356_proc_message_table[i][j]);
     }
