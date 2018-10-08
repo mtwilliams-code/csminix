@@ -497,7 +497,7 @@ int proc_nr;
   int importantSent[13] = {0};
   int importantReceived[13] = {0};
   int importantMatrix[13][13] = {{0}};
-  int* max_digits = (int*) malloc(sizeof(int)*10);
+  int* max_digits = (int*) malloc(sizeof(int)*13);
 
   if(sys_getproctab(proc) != OK)
     return;
@@ -532,6 +532,47 @@ int proc_nr;
     }
   }
 
+  for (i = 0; i < 13; i++)
+  {
+    int largest = 0;
+    int flag = 0;
+    int currentSum = 0;
+    for(j=0; j < NR_TASKS + NR_PROCS; t++)
+    {
+      int sum = 0
+      for(t=0; t < NR_TASKS + NR_PROCS; t++)
+      {
+        sum += rp->os_message_table[t];
+      }
+      for (i = 0; t < 13; t++)
+      {
+        if (importantSent[t] == j)
+          flag = 1;
+      }
+      if (flag == 0 && sum > currentSum)
+      {
+        currentSum = sum;
+        importantSent[i] = j;
+      }
+    }
+    
+    if (os_cs356_proc_sum_received)
+    max_digits[i] = 0;
+    for (j = 0; j < 13; j++)
+    {
+      int digits = 5;
+      if (os_cs356_proc_message_table[i][j] < 100000) digits = 5;
+      if (os_cs356_proc_message_table[i][j] < 10000) digits = 4;
+      if (os_cs356_proc_message_table[i][j] < 1000) digits = 3;
+
+      (digits > max_digits[i]) ? max_digits[i] = digits : digits+0;          
+    }
+  }
+
+
+
+  
+
   printf("---------------- Matthew, John, Kyle - Message Table Dump ---------------- \n");
   
   
@@ -539,7 +580,7 @@ int proc_nr;
   rp = BEG_PROC_ADDR;
   for (i = 0; i < 13; i++)
   {
-    procName = (rp+i)->p_name;
+    procName = (rp+importantSent[i])->p_name;
     printf("%*.*s ", max_digits[i] , max_digits[i], procName);
   }
 
@@ -547,16 +588,16 @@ int proc_nr;
 
   for (i = 0; i < 13; i++)
   {
-    printf("%*.*d ", max_digits[i], max_digits[i], i - NR_TASKS);
+    printf("%*.*d ", max_digits[i], max_digits[i], importantSent[i] - NR_TASKS);
   }
 
   for (i = 0; i < 13; i++)
   {
-    procName = (rp+i)->p_name;
-    printf("\n%4.4s %3d ", procName, i - NR_TASKS);
+    procName = (rp+importantSent[i])->p_name;
+    printf("\n%4.4s %3d ", procName, importantSent[i] - NR_TASKS);
     for (j = 0; j < 13; j++)
     {
-      printf("%*.*d ", max_digits[j], max_digits[j], os_cs356_proc_message_table[i][j]);
+      printf("%*.*d ", max_digits[importantSent[j]], max_digits[importantSent[j]], os_cs356_proc_message_table[importantSent[i]][importantSent[j]]);
     }
   }
   
