@@ -485,5 +485,52 @@ int proc_nr;
  *===========================================================================*/
  PUBLIC void cs356_dmp()
  {
-	 printf(os_cs356_proc_message_table"\n");
+	 register struct proc *rp;
+	 int i = 0, j = 0, k = 0;
+	 int s = 0, p = 0;
+	 static int cs = 1;
+	 
+	 if(sys_getproctab(proc) != OK)
+		 return;
+	 
+	 printf("bla bla bla bla bla [%d/%d]\n", cs, END_PROC_ADDR-BEG_PROC_ADDR);
+	 printf("%7s|", "X \\ Y");
+	 
+	 for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, p < 9; rp++)
+	 {
+		 if (isemptyp(rp))
+			 continue;
+		 ++j;
+		 if (j < cs)
+			 continue;
+		 ++p;
+		 printf("%7s|", rp->p_name);
+	 }
+	 printf("\n");
+	 
+	 for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR, s < 22; ++rp)
+	 {
+		 if (isemptyp(rp))
+			 continue;
+		 ++k;
+		 if (k < cs)
+			 continue;
+		 ++s;
+		 j = p = 0;
+		 printf("%7s|", rp->p_name);
+		 for (i = 0; i < NR_TASKS + NR_PROCS, p < 9; i++)
+		 {
+			if (isemptyp(&proc[i]))
+			 continue;
+		 	++j;
+		 	if (j < cs)
+			 continue;
+			++p;
+			printf("%7d|", rp->os_message_table[i]);
+		 }
+		 printf("\n");
+	 }
+	 cs +=21;
+	 if (cs > END_PROC_ADDR-BEG_PROC_ADDR)
+		 cs = 1;
  }
