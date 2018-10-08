@@ -494,9 +494,9 @@ int proc_nr;
   int os_cs356_proc_message_table[NR_TASKS+NR_PROCS][NR_TASKS+NR_PROCS] = {{0}};
   int os_cs356_proc_sum_sent[NR_TASKS+NR_PROCS] = {0};
   int os_cs356_proc_sum_received[NR_TASKS+NR_PROCS] = {0};
-  int importantSent[10] = {0};
-  int importantReceived[10] = {0};
-  int importantMatrix[10][10] = {{0}};
+  int importantSent[13] = {0};
+  int importantReceived[13] = {0};
+  int importantMatrix[13][13] = {{0}};
   int* max_digits = (int*) malloc(sizeof(int)*10);
 
   if(sys_getproctab(proc) != OK)
@@ -518,10 +518,10 @@ int proc_nr;
     v++;
   }
 
-  for (i = 0; i < 10; i++)
+  for (i = 0; i < 13; i++)
   {
     max_digits[i] = 0;
-    for (j = 0; j < 10; j++)
+    for (j = 0; j < 13; j++)
     {
       int digits = 5;
       if (os_cs356_proc_message_table[i][j] < 100000) digits = 5;
@@ -537,7 +537,7 @@ int proc_nr;
   
   printf("    name ");
   rp = BEG_PROC_ADDR;
-  for (i = 0; i < 10; i++)
+  for (i = 0; i < 13; i++)
   {
     procName = (rp+i)->p_name;
     printf("%*.*s ", max_digits[i] , max_digits[i], procName);
@@ -545,12 +545,12 @@ int proc_nr;
 
   printf("\nname pid ");
 
-  for (i = 0; i < 10; i++)
+  for (i = 0; i < 13; i++)
   {
     printf("%*.*d ", max_digits[i], max_digits[i], i - NR_TASKS);
   }
 
-  for (i = 0; i < 10; i++)
+  for (i = 0; i < 13; i++)
   {
     procName = (rp+i)->p_name;
     printf("\n%4.4s %3d ", procName, i - NR_TASKS);
