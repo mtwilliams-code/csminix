@@ -488,14 +488,20 @@ int proc_nr;
 	register struct proc *rp;
 	int i = 0, j = 0, k = 0;
   int s = 0, p = 0, t = 0, v = 0;
+  int sum = 0;
   static int cs = 1;
-  int os_cs356_proc_message_table[NR_TASKS+NR_PROCS][NR_TASKS+NR_PROCS];
-   
+  int os_cs356_proc_message_table[NR_TASKS+NR_PROCS][NR_TASKS+NR_PROCS] = {{0}};
+  int os_cs356_proc_sum_sent[NR_TASKS+NR_PROCS] = {0};
+  int os_cs356_proc_sum_received[NR_TASKS+NR_PROCS] = {0};
+  int importantSent[10] = {0};
+  int importantReceived[10] = {0};
+  int importantMatrix[10][10] = {{0}};
+  int* max_digits = (int*) malloc(sizeof(int)*10);
+
   if(sys_getproctab(proc) != OK)
     return;
-   
-  printf("---------------- Matthew, John, Kyle - Message Table Dump ---------------- \n");
-   
+  
+  /* Moves everything into the matrix so that we can use it more easily!!!*/
   for (rp = BEG_PROC_ADDR; rp < END_PROC_ADDR; rp++)
   {
     if (isemptyp(rp))
@@ -510,6 +516,49 @@ int proc_nr;
     }
     v++;
   }
+
+  for (i = 0; i < 10; i++)
+  {
+    max_digits[i] = 0;
+    for (j = 0; j < 10; j++)
+    {
+      int digits = 5;
+      if (os_356_proc_message_table[i][j] < 100000) digits = 5;
+      if (os_356_proc_message_table[i]][j] < 10000) digits = 4;
+      if (os_356_proc_message_table[i][j] < 1000) digits = 3;
+
+      (digits > max_digits[i]) ? max_digits[i] = digits : digits+0;          
+    }
+  }
+
+  printf("---------------- Matthew, John, Kyle - Message Table Dump ---------------- \n");
+  
+  
+  printf("    name ");
+  rp = BEG_PROC_ADDR;
+  for (i = 0; i < 10; i++)
+  {
+    procName = (rp+i)->p_name;
+    printf("%*.*s ", max_digits[i] , max_digits[i], procName);
+  }
+
+  printf("\nname pid ");
+
+  for (i = 0; i < 10; i++)
+  {
+    printf("%*.*d ", max_digits[i], max_digits[i], i - NR_TASKS);
+  }
+
+  for (i = 0; i < 10; i++)
+  {
+    procName = (rp+i)->p_name;
+    printf("\n%4.4s %3d ", procName, pidsSent[i]);
+    for (j = 0; j < 10; j++)
+    {
+      printf("%*.*d ", max_digits[j], max_digits[j], os_356_proc_message_table[i][j]);
+    }
+  }
+  
   printf("\n");
 
 
