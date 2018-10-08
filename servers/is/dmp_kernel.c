@@ -535,16 +535,16 @@ int proc_nr;
   for (i = 0; i < 13; i++)
   {
     int largest = 0;
-    int flag = 0;
     int currentSum = 0;
-    for(j=0; j < NR_TASKS + NR_PROCS; t++)
+    for(j=0; j < NR_TASKS + NR_PROCS; j++)
     {
+      int flag = 0;
       int sum = 0
       for(t=0; t < NR_TASKS + NR_PROCS; t++)
       {
         sum += rp->os_message_table[t];
       }
-      for (i = 0; t < 13; t++)
+      for (t = 0; t < 13; t++)
       {
         if (importantSent[t] == j)
           flag = 1;
