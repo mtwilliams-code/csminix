@@ -547,7 +547,7 @@ int proc_nr;
       {
         if (importantSent[t] == j)
           flag = 1;
-      
+      }
       if (flag == 0 && sum > currentSum)
       {
         currentSum = sum;
