@@ -553,10 +553,10 @@ int proc_nr;
   for (i = 0; i < 10; i++)
   {
     procName = (rp+i)->p_name;
-    printf("\n%4.4s %3d ", procName, pidsSent[i]);
+    printf("\n%4.4s %3d ", procName, i - NR_TASKS);
     for (j = 0; j < 10; j++)
     {
-      printf("%*.*d ", max_digits[j], max_digits[j], os_356_proc_message_table[i][j]);
+      printf("%*.*d ", max_digits[j], max_digits[j], os_cs356_proc_message_table[i][j]);
     }
   }
   
