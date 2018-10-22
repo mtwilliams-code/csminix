@@ -124,7 +124,7 @@ not_runnable_pick_new:
 		proc_ptr->p_rts_flags &= ~RTS_PREEMPTED;
 		if (proc_is_runnable(proc_ptr)) {
 			if (!is_zero64(proc_ptr->p_cpu_time_left))
-				enqueue(proc_ptr);
+				enqueue_head(proc_ptr);
 			else
 				enqueue(proc_ptr);
 		}
@@ -1282,7 +1282,7 @@ PUBLIC void dequeue(const struct proc *rp)
           *xpp = (*xpp)->p_nextready;		/* replace with next chain */
           if (rp == rdy_tail[q]) {		/* queue tail removed */
               rdy_tail[q] = prev_xp;		/* set new tail */
-	  			}
+	  }
 
           break;
       }
