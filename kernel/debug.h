@@ -6,7 +6,6 @@
  * and macros. Therefore, this header file should be included after the
  * other kernel headers.
  */
-
 #include <ansi.h>
 #include <minix/debug.h>
 #include "config.h"
