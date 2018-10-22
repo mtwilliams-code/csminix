@@ -35,7 +35,7 @@
  * the next process to run, in order to help catch race
  * conditions that could otherwise be masked.
  */
-#define DEBUG_RACE			1
+#define DEBUG_RACE			0
 
 /* DEBUG_DUMPIPC dumps all IPC to serial; due to the amount of logging it is 
  * strongly recommended to set "ctty 0" in the boot monitor and run inside a 
