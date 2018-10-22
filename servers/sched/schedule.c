@@ -123,7 +123,17 @@ PUBLIC int do_start_scheduling(message *m_ptr)
 				&parent_nr_n)) != OK)
 			return rv;
 
-		rmp->priority = schedproc[parent_nr_n].priority;
+
+			/**
+			 *  changed from 
+			 * rmp->priority = schedproc[parent_nr_n].priority;
+			 *  to 
+			 * rmp->priority = rmp->max_priority;
+			 *  so that everything will have the same priority (i think this will work)
+			 * 
+			 */
+
+		rmp->priority = rmp->max_priority;
 		rmp->time_slice = schedproc[parent_nr_n].time_slice;
 		break;
 		
