@@ -6,6 +6,7 @@
  * and macros. Therefore, this header file should be included after the
  * other kernel headers.
  */
+
 #include <ansi.h>
 #include <minix/debug.h>
 #include "config.h"
@@ -24,7 +25,7 @@
 #define DEBUG_TIME_LOCKS		1
 
 /* Sanity checks. */
-#define DEBUG_SANITYCHECKS		0
+#define DEBUG_SANITYCHECKS		1
 
 /* Verbose messages. */
 #define DEBUG_TRACE			0
@@ -34,7 +35,7 @@
  * the next process to run, in order to help catch race
  * conditions that could otherwise be masked.
  */
-#define DEBUG_RACE			0
+#define DEBUG_RACE			1
 
 /* DEBUG_DUMPIPC dumps all IPC to serial; due to the amount of logging it is 
  * strongly recommended to set "ctty 0" in the boot monitor and run inside a 
