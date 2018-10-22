@@ -25,7 +25,7 @@
 #define DEBUG_TIME_LOCKS		1
 
 /* Sanity checks. */
-#define DEBUG_SANITYCHECKS		0
+#define DEBUG_SANITYCHECKS		1
 
 /* Verbose messages. */
 #define DEBUG_TRACE			0
